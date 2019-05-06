@@ -14,5 +14,9 @@
         "import/no-unresolved": 0,
         "react/jsx-filename-extension": 0,
         "linebreak-style": 0
-    }
+    },
+    "plugins": ["jest"],
+    "env": {
+        "jest/globals": true
+      }
 }

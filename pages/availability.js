@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { getStations } from '../lib/bikesharelib'
+import config from '../config'
 
-export default class Stationinfo extends Component {
-  static async getInitialProps ({ context, store, isServer, res, asPath }) {
+export default class Availability extends Component {
+  static async getInitialProps () {
     try {
-      const stations = await getStations()
+      const stations = await getStations(config.apiAutoDiscoveryUrl)
       return { stations }
     } catch (e) {
       console.log(e)
@@ -32,16 +33,16 @@ export default class Stationinfo extends Component {
 
   renderStations () {
     const { stations } = this.props
-    return <div className='rTable' id={'table'}>
-      <div className='rTableRow rTableHeader' id={'headrow'}>
-        <div className='rTableHead' id={'head1'}>Stasjon</div>
-        <div className='rTableHead' id={'head2'}>Antall sykler</div>
-        <div className='rTableHead' id={'head3'}>Antall låser</div>
+    return <div className='rTable'>
+      <div className='rTableRow rTableHeader' key={'headrow'}>
+        <div className='rTableHead' key={'head1'}>Stasjon</div>
+        <div className='rTableHead' key={'head2'}>Antall sykler</div>
+        <div className='rTableHead' key={'head3'}>Antall låser</div>
       </div>
-      { stations.map(station => <div className='rTableRow' id={station.id}>
-        <div className='rTableCell' id={`${station.id}_name`}>{station.name}</div>
-        <div className='rTableCell' id={`${station.id}_numBikes`}>{station.numBikes}</div>
-        <div className='rTableCell' id={`${station.id}_numDocks`}>{station.numDocks}</div>
+      { stations.map(station => <div className='rTableRow' key={station.id}>
+        <div className='rTableCell' key={`${station.id}_name`}>{station.name}</div>
+        <div className='rTableCell' key={`${station.id}_numBikes`}>{station.numBikes}</div>
+        <div className='rTableCell' key={`${station.id}_numDocks`}>{station.numDocks}</div>
       </div>) }
       <style jsx>{`
       .rTable { 
@@ -66,7 +67,7 @@ export default class Stationinfo extends Component {
   }
 }
 
-Stationinfo.propTypes = {
+Availability.propTypes = {
   stations: PropTypes.array,
   error: PropTypes.string
 }

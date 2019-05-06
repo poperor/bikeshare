@@ -10,6 +10,9 @@ The error handling is simply rendering a general error message to the user if th
 ### Requirements 
 node 8.x or higher
 
+### Tests
+Tests are written with jest and enzyme - some unit tests and some enzyme tests for testing the rendering.
+
 ### Config
 The api auto discovery url and the client-name header can if desired be configured in ~/config.js before the app is built.
 
@@ -21,6 +24,9 @@ navigate to the top folder of the app
 npm install
 
 npm run build
+
+### Running tests
+npm test
 
 ### Usage
 npm start
